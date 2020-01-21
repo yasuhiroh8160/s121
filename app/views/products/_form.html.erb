@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :size_id %>
+    <%= form.collection_select :size_id, Size.all, :id, :name %>
+  </div>
+
+  <div class="field">
     <%= form.label :images %>
     <%= form.file_field :images, multiple: true %>
   </div>
