@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_071426) do
+ActiveRecord::Schema.define(version: 2020_01_21_075821) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,8 +33,20 @@ ActiveRecord::Schema.define(version: 2020_01_21_071426) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "who"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,13 +61,33 @@ ActiveRecord::Schema.define(version: 2020_01_21_071426) do
     t.bigint "user_id"
     t.bigint "condition_id"
     t.bigint "shipping_id"
+    t.bigint "category_id"
+    t.bigint "size_id"
+    t.bigint "fee_id"
+    t.bigint "term_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["condition_id"], name: "index_products_on_condition_id"
+    t.index ["fee_id"], name: "index_products_on_fee_id"
     t.index ["shipping_id"], name: "index_products_on_shipping_id"
+    t.index ["size_id"], name: "index_products_on_size_id"
+    t.index ["term_id"], name: "index_products_on_term_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "shippings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "terms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -74,7 +106,11 @@ ActiveRecord::Schema.define(version: 2020_01_21_071426) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "products", "categories"
   add_foreign_key "products", "conditions"
+  add_foreign_key "products", "fees"
   add_foreign_key "products", "shippings"
+  add_foreign_key "products", "sizes"
+  add_foreign_key "products", "terms"
   add_foreign_key "products", "users"
 end
