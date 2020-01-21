@@ -7,4 +7,5 @@ class Product < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :fee, optional: true
   belongs_to :term, optional: true
+  belongs_to :address, optional: true
 end

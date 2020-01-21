@@ -33,7 +33,7 @@
     <%= product.category.name %>
   </p>
 
-  <p><strong>サイズ</strong>
+    <p><strong>サイズ</strong>
     <%= product.size.name %>
   </p>
 
@@ -41,8 +41,16 @@
     <%= product.fee.who %>
   </p>
 
+  <p><strong>発送元</strong>
+    <%= product.address.prefecture.name  %>
+  </p>
+
+
   <p><strong>発送日の目安</strong>
     <%= product.term.name %>
   </p>
+
+<hr>
+
 
 <% end %>
