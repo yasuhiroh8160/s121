@@ -25,6 +25,11 @@
   <%= @product.brand %>
 </p>
 
+<p>
+  <strong>発送方法</strong>
+  <%= @product.shipping.method %>
+</p>
+
 
 <% if @product.images.attached? %>
   <% @product.images.each do |image| %>

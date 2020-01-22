@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_114739) do
+ActiveRecord::Schema.define(version: 2020_01_22_035154) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +58,25 @@ ActiveRecord::Schema.define(version: 2020_01_21_114739) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "fromprefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "price"
@@ -73,10 +92,12 @@ ActiveRecord::Schema.define(version: 2020_01_21_114739) do
     t.bigint "fee_id"
     t.bigint "term_id"
     t.bigint "address_id"
+    t.bigint "fromprefecture_id"
     t.index ["address_id"], name: "index_products_on_address_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["condition_id"], name: "index_products_on_condition_id"
     t.index ["fee_id"], name: "index_products_on_fee_id"
+    t.index ["fromprefecture_id"], name: "index_products_on_fromprefecture_id"
     t.index ["shipping_id"], name: "index_products_on_shipping_id"
     t.index ["size_id"], name: "index_products_on_size_id"
     t.index ["term_id"], name: "index_products_on_term_id"
@@ -101,6 +122,13 @@ ActiveRecord::Schema.define(version: 2020_01_21_114739) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -119,6 +147,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_114739) do
   add_foreign_key "products", "categories"
   add_foreign_key "products", "conditions"
   add_foreign_key "products", "fees"
+  add_foreign_key "products", "fromprefectures"
   add_foreign_key "products", "shippings"
   add_foreign_key "products", "sizes"
   add_foreign_key "products", "terms"

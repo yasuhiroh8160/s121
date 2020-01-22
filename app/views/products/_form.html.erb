@@ -27,17 +27,27 @@
   </div>
 
   <div class="field">
-    <%= form.label :brand %>
+    <%= form.label :ブランド名 %>
     <%= form.text_field :brand %>
   </div>
 
   <div class="field">
-    <%= form.label :size_id %>
+    <%= form.label :サイズ %>
     <%= form.collection_select :size_id, Size.all, :id , :name %>
   </div>
 
   <div class="field">
-    <%= form.label :images %>
+    <%= form.label :発送地域 %>
+    <%= form.collection_select :fromprefecture_id, Fromprefecture.all, :id, :name, prompt: "--" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :発送方法 %>
+    <%= form.collection_select :shipping_id, Shipping.all, :id, :method, prompt: "--" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :画像 %>
     <%= form.file_field :images, multiple: true %>
   </div>
 
